@@ -1,0 +1,21 @@
+# Appearance
+theme = TokyoNight Night
+font-family = MesloLGMDZ Nerd Font Mono
+font-size = 13
+background-opacity = 0.80
+background-blur = true
+
+# Option as Alt/Meta key
+macos-option-as-alt = true
+
+# Cursor
+shell-integration-features = no-cursor
+cursor-style = bar
+cursor-style-blink = false
+
+# SSH compatibility fix
+term = "xterm-256color"
+
+# Misc
+quit-after-last-window-closed = true
+maximize = true
