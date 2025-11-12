@@ -2,11 +2,8 @@
 set -euo pipefail
 msg() { echo -e "\033[1;36m[zsh] $*\033[0m"; }
 
-ZDOTDIR="${ZDOTDIR:-$HOME/.config/zsh}"
 ZSH_DIR="$HOME/.oh-my-zsh"
 ZSH_CUSTOM="${ZSH_CUSTOM:-$ZSH_DIR/custom}"
-
-mkdir -p "$ZDOTDIR"
 
 if [[ ! -d "$ZSH_DIR" ]]; then
     msg "installing Oh My Zsh..."
@@ -32,8 +29,6 @@ mkdir -p "$ZSH_CUSTOM/plugins" "$ZSH_CUSTOM/themes"
 
 ensure_repo https://github.com/zdharma-continuum/fast-syntax-highlighting.git \
     "$ZSH_CUSTOM/plugins/fast-syntax-highlighting"
-ensure_repo https://github.com/zdharma-continuum/zsh-alias-finder.git \
-    "$ZSH_CUSTOM/plugins/zsh-alias-finder"
 ensure_repo https://github.com/TamCore/autoupdate-oh-my-zsh-plugins.git \
     "$ZSH_CUSTOM/plugins/autoupdate"
 ensure_repo https://github.com/zsh-users/zsh-autosuggestions.git \
