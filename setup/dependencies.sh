@@ -19,7 +19,7 @@ install_deps() {
     elif [[ -f /etc/debian_version ]]; then
         msg "installing/upgrading packages via apt..."
         sudo apt update
-        sudo apt install -y curl git stow tmux neovim zsh fzf ripgrep fd-find zoxide wget unzip lazygit lazydocker
+        sudo apt install -y curl git stow tmux neovim zsh fzf ripgrep fd-find zoxide wget unzip lazygit
 
         # Symlink fd to fd-find (Debian uses a different binary name)
         if ! command -v fd >/dev/null 2>&1 && command -v fdfind >/dev/null 2>&1; then
