@@ -11,6 +11,7 @@ install_deps() {
         fi
         msg "installing/upgrading packages via Homebrew..."
         brew install curl git stow tmux neovim zsh fzf ripgrep fd zoxide font-meslo-lg-nerd-font lazygit lazydocker
+	brew install --cask nikitabobko/tap/aerospace
 
     elif [[ -f /etc/arch-release ]]; then
         msg "installing/upgrading packages via pacman..."
