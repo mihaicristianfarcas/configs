@@ -17,5 +17,5 @@ cursor-style-blink = false
 term = "xterm-256color"
 
 # Misc
-quit-after-last-window-closed = true
+quit-after-last-window-closed = false
 maximize = true
