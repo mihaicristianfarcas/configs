@@ -10,6 +10,7 @@ install_deps() {
             exit 1
         fi
         msg "installing/upgrading packages via Homebrew..."
+	brew upgrade
         brew install curl git stow tmux neovim zsh fzf ripgrep fd zoxide font-meslo-lg-nerd-font lazygit lazydocker atuin
 	brew install --cask nikitabobko/tap/aerospace
 
@@ -19,9 +20,12 @@ install_deps() {
 
     elif [[ -f /etc/debian_version ]]; then
         msg "installing/upgrading packages via apt..."
-        sudo apt update
+        sudo apt update && sudo apt full-upgrade
         sudo apt install -y curl git stow tmux neovim zsh fzf ripgrep fd-find zoxide wget unzip lazygit
-	curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
+	
+	if ! command -v atuin >/dev/null 2>&1; then
+	  curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
+	fi
 
         # Symlink fd to fd-find (Debian uses a different binary name)
         if ! command -v fd >/dev/null 2>&1 && command -v fdfind >/dev/null 2>&1; then
