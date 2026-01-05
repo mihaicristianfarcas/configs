@@ -125,30 +125,12 @@ source $ZSH/oh-my-zsh.sh
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-. "$HOME/.atuin/bin/env"
-eval "$(atuin init zsh)"
-
 alias c='clear'
 alias lzg='lazygit'
 alias lzd='lazydocker'
 
-# alias g='git'
-# alias gss='git status -s'
-# alias gs='git status'
-# alias gaa='git add .'
-# alias gau='git add -u'
-# alias gcm='git commit -m'
-# alias gca='git commit -a -m'
-# alias gp='git push'
-# alias gd='git diff'
-# alias gl='git log --oneline --graph --all'
-# alias gco='git checkout'
-# alias gcb='git checkout -b'
-# alias gsw='git switch'
-# alias gswc='git switch -c'
-# alias gplr='git pull --rebase'
-# alias gpu='git push -u origin HEAD'
-# alias gsta='git stash push -m'
-# alias gld='git log --decorate --oneline --graph --all'
-
-
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/mihaicristianfarcas/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
+# End of Docker CLI completions

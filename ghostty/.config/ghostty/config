@@ -1,7 +1,7 @@
 # Appearance
-theme = TokyoNight Night
+theme = Cursor Dark
 font-family = MesloLGMDZ Nerd Font Mono
-font-size = 13
+font-size = 14
 background-opacity = 0.80
 background-blur = true
 
@@ -10,7 +10,7 @@ macos-option-as-alt = true
 
 # Cursor
 shell-integration-features = no-cursor
-cursor-style = bar
+# cursor-style = bar
 cursor-style-blink = false
 
 # SSH compatibility fix
@@ -18,4 +18,4 @@ term = "xterm-256color"
 
 # Misc
 quit-after-last-window-closed = false
-maximize = true
+# maximize = true
