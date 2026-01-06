@@ -31,7 +31,7 @@ done
 msg "applying stow links..."
 cd "$REPO_ROOT"
 packages=()
-for dir in tmux zsh ghostty aerospace atuin; do
+for dir in tmux zsh ghostty atuin; do
     [[ -d "$dir" ]] && packages+=("$dir")
 done
 
