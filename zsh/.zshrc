@@ -125,10 +125,12 @@ source $ZSH/oh-my-zsh.sh
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+# Aliases
 alias c='clear'
 alias lzg='lazygit'
 alias lzd='lazydocker'
 
+# Atuin init
 eval "$(atuin init zsh)"
 
 # The following lines have been added by Docker Desktop to enable Docker CLI completions.
@@ -136,3 +138,10 @@ fpath=(/Users/mihaicristianfarcas/.docker/completions $fpath)
 autoload -Uz compinit
 compinit
 # End of Docker CLI completions
+
+# Added by Antigravity
+export PATH="/Users/mihaicristianfarcas/.antigravity/antigravity/bin:$PATH"
+
+# Homebrew paths
+export PATH="/opt/homebrew/sbin:$PATH"
+export PATH="/opt/homebrew/bin:$PATH"
