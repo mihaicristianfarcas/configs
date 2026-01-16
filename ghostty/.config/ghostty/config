@@ -18,4 +18,4 @@ term = "xterm-256color"
 
 # Misc
 quit-after-last-window-closed = false
-# maximize = true
+maximize = true

@@ -145,3 +145,6 @@ export PATH="/Users/mihaicristianfarcas/.antigravity/antigravity/bin:$PATH"
 # Homebrew paths
 export PATH="/opt/homebrew/sbin:$PATH"
 export PATH="/opt/homebrew/bin:$PATH"
+export PATH="/opt/homebrew/opt/postgresql@18/bin:$PATH"
+export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+export PATH="/Users/mihaicristianfarcas/.cargo/bin:$PATH"
