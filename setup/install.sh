@@ -9,7 +9,7 @@ source "$SCRIPT_DIR/lib.sh"
 
 # Available components and stow packages
 ALL_COMPONENTS=(nvim tmux zsh ghostty)
-STOW_PACKAGES=(tmux zsh ghostty atuin nvim)
+STOW_PACKAGES=(tmux zsh ghostty atuin)
 
 # Parse arguments
 DRY_RUN=false
@@ -140,7 +140,7 @@ if ((${#packages_to_stow[@]})); then
         stow --no-folding --restow --target="$HOME" --simulate "${packages_to_stow[@]}" 2>&1 || true
     else
         # Backup existing configs before adopting
-        backup_configs ".zshrc" ".p10k.zsh" ".config/tmux" ".config/ghostty" ".config/atuin" ".config/nvim"
+        backup_configs ".zshrc" ".p10k.zsh" ".config/tmux" ".config/ghostty" ".config/atuin"
         
         # Use --adopt to handle existing files, then restore repo versions
         stow --no-folding --adopt --restow --target="$HOME" "${packages_to_stow[@]}"
