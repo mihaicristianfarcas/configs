@@ -10,9 +10,15 @@ install_lazygit() {
         return
     fi
     msg "installing lazygit from GitHub releases..."
-    local version
+    local version arch lazygit_arch
     version=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
-    curl -Lo /tmp/lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${version}_Linux_x86_64.tar.gz"
+    arch=$(uname -m)
+    if [[ "$arch" == "aarch64" || "$arch" == "arm64" ]]; then
+        lazygit_arch="arm64"
+    else
+        lazygit_arch="x86_64"
+    fi
+    curl -fLo /tmp/lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${version}_Linux_${lazygit_arch}.tar.gz"
     tar xf /tmp/lazygit.tar.gz -C /tmp lazygit
     sudo install /tmp/lazygit /usr/local/bin
     rm -f /tmp/lazygit.tar.gz /tmp/lazygit
@@ -25,9 +31,15 @@ install_lazydocker() {
         return
     fi
     msg "installing lazydocker from GitHub releases..."
-    local version
+    local version arch lazydocker_arch
     version=$(curl -s "https://api.github.com/repos/jesseduffield/lazydocker/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
-    curl -Lo /tmp/lazydocker.tar.gz "https://github.com/jesseduffield/lazydocker/releases/latest/download/lazydocker_${version}_Linux_x86_64.tar.gz"
+    arch=$(uname -m)
+    if [[ "$arch" == "aarch64" || "$arch" == "arm64" ]]; then
+        lazydocker_arch="arm64"
+    else
+        lazydocker_arch="x86_64"
+    fi
+    curl -fLo /tmp/lazydocker.tar.gz "https://github.com/jesseduffield/lazydocker/releases/latest/download/lazydocker_${version}_Linux_${lazydocker_arch}.tar.gz"
     tar xf /tmp/lazydocker.tar.gz -C /tmp lazydocker
     sudo install /tmp/lazydocker /usr/local/bin
     rm -f /tmp/lazydocker.tar.gz /tmp/lazydocker
@@ -46,11 +58,20 @@ install_atuin() {
 # Install neovim from GitHub releases (Ubuntu repos often have outdated versions)
 install_neovim_latest() {
     msg "installing neovim from GitHub releases..."
-    curl -Lo /tmp/nvim-linux64.tar.gz "https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz"
+    local arch
+    arch=$(uname -m)
+    local nvim_archive
+    if [[ "$arch" == "aarch64" || "$arch" == "arm64" ]]; then
+        nvim_archive="nvim-linux-arm64.tar.gz"
+    else
+        nvim_archive="nvim-linux-x86_64.tar.gz"
+    fi
+    curl -fLo /tmp/nvim.tar.gz "https://github.com/neovim/neovim/releases/latest/download/${nvim_archive}"
     sudo rm -rf /opt/nvim
-    sudo tar -C /opt -xzf /tmp/nvim-linux64.tar.gz
-    sudo ln -sf /opt/nvim-linux64/bin/nvim /usr/local/bin/nvim
-    rm -f /tmp/nvim-linux64.tar.gz
+    sudo mkdir -p /opt/nvim
+    sudo tar -C /opt/nvim --strip-components=1 -xzf /tmp/nvim.tar.gz
+    sudo ln -sf /opt/nvim/bin/nvim /usr/local/bin/nvim
+    rm -f /tmp/nvim.tar.gz
 }
 
 install_deps() {
