@@ -131,6 +131,7 @@ alias lzg='lazygit'
 alias lzd='lazydocker'
 
 # Atuin init
+source $HOME/.atuin/bin/env
 eval "$(atuin init zsh)"
 
 # The following lines have been added by Docker Desktop to enable Docker CLI completions.
@@ -148,3 +149,13 @@ export PATH="/opt/homebrew/bin:$PATH"
 export PATH="/opt/homebrew/opt/postgresql@18/bin:$PATH"
 export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
 export PATH="/Users/mihaicristianfarcas/.cargo/bin:$PATH"
+
+. "$HOME/.atuin/bin/env"
+
+# bun completions
+[ -s "/home/mihaicristianfarcas/.bun/_bun" ] && source "/home/mihaicristianfarcas/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
