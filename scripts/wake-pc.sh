@@ -9,10 +9,10 @@ for i in $(seq 1 15);
 do
     if [ $i -lt 15 ]; then
         printf "$i, "
+	sleep 1
     else
 	printf "$i!\n"
     fi
-    sleep 1
 done
 
 printf "\n>> Try connection...\n\n"
