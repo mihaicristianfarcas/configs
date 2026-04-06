@@ -118,7 +118,6 @@ cd "$REPO_ROOT"
 # Determine which packages to stow based on selected components
 packages_to_stow=()
 for pkg in "${STOW_PACKAGES[@]}"; do
-    # Include package if it exists and matches a selected component or is atuin (always included)
     if [[ -d "$REPO_ROOT/$pkg" ]]; then
         if [[ "$pkg" == "atuin" ]]; then
             packages_to_stow+=("$pkg")
@@ -135,16 +134,26 @@ done
 
 if ((${#packages_to_stow[@]})); then
     msg "stowing packages: ${packages_to_stow[*]}"
-    
+
     if $DRY_RUN; then
-        stow --no-folding --restow --target="$HOME" --simulate "${packages_to_stow[@]}" 2>&1 || true
+        stow --no-folding --simulate --target="$HOME" "${packages_to_stow[@]}" 2>&1 || true
     else
-        # Backup existing configs before adopting
+        # Backup existing configs before touching anything
         backup_configs ".zshrc" ".p10k.zsh" ".config/tmux" ".config/ghostty" ".config/atuin"
-        
-        # Use --adopt to handle existing files, then restore repo versions
-        stow --no-folding --adopt --restow --target="$HOME" "${packages_to_stow[@]}"
-        git -C "$REPO_ROOT" checkout -- .
+
+        # Remove real files that would conflict — stow cannot replace them with symlinks
+        for pkg in "${packages_to_stow[@]}"; do
+            while IFS= read -r -d '' file; do
+                rel="${file#$REPO_ROOT/$pkg/}"
+                target="$HOME/$rel"
+                if [[ -e "$target" && ! -L "$target" ]]; then
+                    msg "removing conflicting file: $target"
+                    rm -rf "$target"
+                fi
+            done < <(find "$REPO_ROOT/$pkg" -type f -print0)
+        done
+
+        stow --no-folding --restow --target="$HOME" "${packages_to_stow[@]}"
     fi
 else
     warn "no packages to stow. ensure your config directories exist."
