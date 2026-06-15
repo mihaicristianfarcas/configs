@@ -159,3 +159,6 @@ export PATH="/Users/mihaicristianfarcas/.cargo/bin:$PATH"
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
+
+# zsh-autocomplete
+bindkey '^[[Z' autosuggest-accept  # shift + tab  | autosuggest
